@@ -3,28 +3,28 @@ import css from './Phonebook.module.css';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 
-
-export default function ContactForm({ onSubmit }) {
+export default function ContactForm({ formSubmitHandler }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const handleChange = evt => {
     const { name, value } = evt.target;
-console.log(name);
-console.log(value);
 
     switch (name) {
-      case 'name': setName(value);
+      case 'name':
+        setName(value);
         break;
-      case 'number': setNumber(value);
+      case 'number':
+        setNumber(value);
         break;
       default:
         return;
-    }};
+    }
+  };
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    onSubmit({ name, number });
+    formSubmitHandler({ name, number });
     evt.currentTarget.reset();
   };
 
@@ -32,7 +32,9 @@ console.log(value);
 
   return (
     <div className={css.formContainer}>
-      <form action="" className={css.formField} onSubmit={handleSubmit}>
+      <form action="" 
+      className={css.formField} 
+      onSubmit={handleSubmit}>
         <label htmlFor={loginInputId} className={css.labelField}>
           Name
         </label>
@@ -68,6 +70,6 @@ console.log(value);
 }
 
 ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  formSubmitHandler: PropTypes.func.isRequired,
 };
 
